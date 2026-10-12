@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Grade Calculator</title>
+<style>
+    body { font-family: Arial; margin: 40px; }
+    input { margin: 6px; padding: 5px; width: 80px; }
+</style>
+</head>
+<body>
+
+<h2>Grade Calculator</h2>
+
+<label>Midterm 1 (0-100):</label><input id="m1" type="number" value="81"><br>
+<label>Midterm 2 (0-100):</label><input id="m2" type="number" value="73"><br>
+<label>Midterm 3 (0-100):</label><input id="m3" type="number" value="89"><br>
+<label>Final (0-100):</label><input id="final" type="number" value="80"><br>
+<label>Project (0-80):</label><input id="project" type="number" value="70"><br>
+<label>Attendance (0-50):</label><input id="attendance" type="number" value="48"><br>
+<label>Lab/Discussion (0-100):</label><input id="lab" type="number" value="100"><br>
+<label>Homework Average (0-30) :</label><input id="hw" type="number" value="27"><br>
+
+<button onclick="calculate()">Calculate</button>
+
+<h3 id="output"></h3>
+
+<script>
+function calculate() {
+    const m = [
+        Number(document.getElementById("m1").value),
+        Number(document.getElementById("m2").value),
+        Number(document.getElementById("m3").value),
+        Number(document.getElementById("final").value)
+    ];
+
+    const topThreeExams = m.sort((a,b) => b - a).slice(0, 3);
+    const project = Number(document.getElementById("project").value);
+    const attendance = Number(document.getElementById("attendance").value);
+    const lab = Number(document.getElementById("lab").value);
+    const hw = Number(document.getElementById("hw").value) * 9;
+    const examSum = topThreeExams[0] + topThreeExams[1] + topThreeExams[2];
+
+    const total = (examSum + project + attendance + lab + hw) / 8;
+
+    document.getElementById("output").innerText =
+        "Total Percentage = " + total.toFixed(2) + "%";
+}
+</script>
+
+</body>
+</html>
